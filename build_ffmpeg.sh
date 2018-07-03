@@ -242,6 +242,33 @@ compile_ffnvcodec()
     cd $CURRENT_DIR
 }
 
+compile_c2man()
+{
+    local CURRENT_DIR
+    CURRENT_DIR=$(pwd)
+
+    cd $SRC/$1
+
+    echo "C2MAN CONFIGURE $1"
+
+    ./Configure -dE
+
+    echo "binexp=$OUT_BIN" >> config.sh
+    echo "installprivlib=$OUT_PREFIX" >> config.sh
+    echo "mansrc=$OUT_PREFIX" >> config.sh
+    sh config_h.SH
+    sh flatten.SH
+    sh Makefile.SH
+
+    echo "MAKE $1"
+
+    make depend
+    make
+    make install
+
+    cd $CURRENT_DIR
+}
+
 
 
 # set path vars
@@ -287,6 +314,7 @@ git_get_fresh  libtheora                  https://github.com/xiph/theora.git
 git_get_fresh  libvidstab                 https://github.com/georgmartius/vid.stab.git
 git_get_fresh  libwebp                    https://chromium.googlesource.com/webm/libwebp
 git_get_fresh  ffnvcodec                  https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
+git_get_fresh  c2man                      https://github.com/fribidi/c2man.git
 
 dl_tar_gz_fre  lame      http://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz
 dl_tar_gz_fre  xvidcore  https://downloads.xvid.com/downloads/xvidcore-1.3.5.tar.gz
@@ -299,6 +327,8 @@ compile_with_autog_iie nasm \
 
 compile_with_autogen   yasm \
                        --bindir=$OUT_BIN
+
+compile_c2man          c2man
 
 # update table
 hash -r
