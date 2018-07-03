@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# DEPENDENCIES-BASE: git, mercurial, curl, tar, gcc, g++, make, libtool, automake, autoconf, pkg-config, cmake
+# DEPENDENCIES-BASE: git, mercurial, curl, tar, gcc, g++, make, libtool, automake, autoconf, pkg-config, cmake, bison
 # DEPENDENCIES?: libexpat, libpng
 # DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel
 
