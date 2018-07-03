@@ -122,7 +122,7 @@ make_src()
 {
     echo "MAKE $1"
 
-    make -j
+    make
     make install
 }
 
@@ -130,7 +130,7 @@ make_iie_src() # ignore install error
 {
     echo "MAKE $1"
 
-    make -j
+    make
     make install || true
 }
 
