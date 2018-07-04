@@ -409,6 +409,8 @@ compile_with_configure ffmpeg \
                        --extra-libs=-lpthread \
                        --extra-libs=-lm \
                        --extra-libs=-lmvec \
+                       --extra-libs=-lfftw3 \
+                       --extra-libs=-lsamplerate \
                        --extra-ldexeflags="-static" \
                        --enable-pthreads \
                        --enable-gpl \
