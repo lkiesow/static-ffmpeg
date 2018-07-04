@@ -2,7 +2,7 @@
 
 # DEPENDENCIES-BASE: git, mercurial, curl, tar, gcc, g++, make, libtool, automake, autoconf, pkg-config, cmake, bison, flex
 # DEPENDENCIES?: libexpat, libpng
-# DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel
+# DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel, libsamplerate0-devel
 
 set -u
 set -e
@@ -285,6 +285,7 @@ export PKG_CONFIG_PATH=$OUT_PKG_CONFIG
 rm -rf $OUT_PREFIX
 rm -rf $OUT_BIN
 
+mkdir -p $OUT_PKG_CONFIG
 mkdir -p $OUT_PREFIX
 mkdir -p $OUT_BIN
 mkdir -p $SRC
@@ -408,6 +409,8 @@ compile_with_configure ffmpeg \
                        --extra-libs=-lpthread \
                        --extra-libs=-lm \
                        --extra-libs=-lmvec \
+                       --extra-libs=-lfftw3 \
+                       --extra-libs=-lsamplerate \
                        --extra-ldexeflags="-static" \
                        --enable-pthreads \
                        --enable-gpl \
@@ -430,6 +433,7 @@ compile_with_configure ffmpeg \
                        --enable-libfreetype \
                        --enable-libfribidi \
                        --enable-frei0r \
+                       --enable-librubberband \
                        --enable-avfilter \
                        --enable-avresample \
                        --enable-bzlib \
