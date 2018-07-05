@@ -1,0 +1,16 @@
+version: '2'
+services:
+  deploy:
+    build: deploy
+    ports:
+      - "2222:22"
+    volumes:
+      - data_vol:/home/deploy/deploy
+  serve:
+    build: serve
+    ports:
+      - "80:80"
+    volumes:
+      - data_vol:/usr/share/nginx/html
+volumes:
+  data_vol:

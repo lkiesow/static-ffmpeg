@@ -1,0 +1,10 @@
+--- rssh.conf	2016-09-05 22:39:58.000000000 +0000
++++ rssh.conf.patched	2018-07-04 15:18:39.498304461 +0000
+@@ -32,6 +32,7 @@
+ #user=rudy:077:000100:  # the path can simply be left out to not chroot
+ #user=rudy:077:000100   # the ending colon is optional
+ 
++user=deploy:011:000010:  # scp without chroot
+ #user=rudy:011:001000:  # cvs, with no chroot
+ #user=rudy:011:010000:  # rdist, with no chroot
+ #user=rudy:011:100000:  # rsync, with no chroot
