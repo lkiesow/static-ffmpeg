@@ -5,12 +5,14 @@ services:
     ports:
       - "2222:22"
     volumes:
-      - data_vol:/home/deploy/deploy
+      - data_vol:/home/deploy/deploy:z
   serve:
     build: serve
     ports:
       - "80:80"
+    depends_on:
+      - deploy
     volumes:
-      - data_vol:/usr/share/nginx/html
+      - data_vol:/usr/share/nginx/html:z
 volumes:
   data_vol:

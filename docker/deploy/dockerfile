@@ -22,8 +22,9 @@ RUN mkdir /run/sshd
 RUN useradd deploy -s /usr/bin/rssh
 COPY authorized_keys/authorized_keys /home/deploy/.ssh/authorized_keys
 RUN mkdir /home/deploy/deploy
-RUN chmod -R 440 /home/deploy
-RUN chmod -R 660 /home/deploy/deploy
+RUN chmod 550 /home/deploy /home/deploy/.ssh
+RUN chmod 400 /home/deploy/.ssh/authorized_keys
+RUN chmod 775 /home/deploy/deploy
 RUN chown -R deploy:deploy /home/deploy
 
 
