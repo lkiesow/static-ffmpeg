@@ -1,1 +1,4 @@
 FROM nginx
+
+RUN chmod 775 /usr/share/nginx/html/
+RUN chown 1000:1000 /usr/share/nginx/html/
