@@ -11,3 +11,6 @@ jobs:
       - run:
           name: Building
           command: ./build_ffmpeg.sh
+      - run:
+          name: Deploy
+          command: ./deploy.sh
