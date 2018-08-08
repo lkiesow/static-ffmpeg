@@ -9,7 +9,9 @@ mv ffmpeg_bin/ffmpeg $FFMPEG_NAME
 
 mkdir -p ~/.ssh/
 chmod 700 ~/.ssh/
-echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_rsa
+echo "$DEPLOY_SSH_KEY_BASE64" > ~/.ssh/id_rsa.base64
+chmod 400 ~/.ssh/id_rsa.base64
+base64 ~/.ssh/id_rsa.base64 > ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
 echo "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
 chmod 400 ~/.ssh/known_hosts
