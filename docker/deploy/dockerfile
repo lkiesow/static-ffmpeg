@@ -10,6 +10,7 @@ WORKDIR /root
 
 
 # PATCHING configuration
+COPY ssh_keys/ssh_host_rsa_key /etc/ssh/ssh_host_rsa_key
 COPY patches/sshd_config.patch  dockersetup/
 COPY patches/rssh.conf.patch    dockersetup/
 
@@ -20,7 +21,7 @@ RUN cd /etc      && patch < /root/dockersetup/rssh.conf.patch
 # Setting up environment
 RUN mkdir /run/sshd
 RUN useradd deploy -s /usr/bin/rssh
-COPY authorized_keys/authorized_keys /home/deploy/.ssh/authorized_keys
+COPY ssh_keys/authorized_keys /home/deploy/.ssh/authorized_keys
 RUN mkdir /home/deploy/deploy
 RUN touch /home/deploy/deploy/.keepperm
 RUN chmod -R 440 /home/deploy
