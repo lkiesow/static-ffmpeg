@@ -1,0 +1,19 @@
+FROM nginx
+
+
+RUN apt-get update && apt-get install -y patch
+
+
+# Patching configs
+COPY patches/default.conf.patch /root/dockersetup/
+
+RUN cd /etc/nginx/conf.d/  && patch < /root/dockersetup/default.conf.patch
+
+
+# Setting up env
+RUN chmod 775 /usr/share/nginx/html/
+RUN chown 1000:1000 /usr/share/nginx/html/
+
+
+# Cleanup
+RUN rm -rf /root/dockersetup

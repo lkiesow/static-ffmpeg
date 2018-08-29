@@ -1,0 +1,11 @@
+--- default.conf	2018-07-24 13:02:29.000000000 +0000
++++ default.conf.patched	2018-08-08 14:53:22.719969137 +0000
+@@ -2,6 +2,8 @@
+     listen       80;
+     server_name  localhost;
+ 
++    autoindex on;
++
+     #charset koi8-r;
+     #access_log  /var/log/nginx/host.access.log  main;
+ 

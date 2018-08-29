@@ -1,0 +1,34 @@
+--- sshd_config	2018-03-01 15:17:53.000000000 +0000
++++ sshd_config.patched	2018-07-04 14:38:51.788321684 +0000
+@@ -29,7 +29,7 @@
+ # Authentication:
+ 
+ #LoginGraceTime 2m
+-#PermitRootLogin prohibit-password
++PermitRootLogin yes
+ #StrictModes yes
+ #MaxAuthTries 6
+ #MaxSessions 10
+@@ -53,7 +53,7 @@
+ #IgnoreRhosts yes
+ 
+ # To disable tunneled clear text passwords, change to no here!
+-#PasswordAuthentication yes
++PasswordAuthentication no
+ #PermitEmptyPasswords no
+ 
+ # Change to yes to enable challenge-response passwords (beware issues with
+@@ -83,10 +83,10 @@
+ # and ChallengeResponseAuthentication to 'no'.
+ UsePAM yes
+ 
+-#AllowAgentForwarding yes
+-#AllowTcpForwarding yes
++AllowAgentForwarding no
++AllowTcpForwarding no
+ #GatewayPorts no
+-X11Forwarding yes
++X11Forwarding no
+ #X11DisplayOffset 10
+ #X11UseLocalhost yes
+ #PermitTTY yes
