@@ -337,7 +337,8 @@ hash -r
 compile_with_configure libx264 \
                        --bindir=$OUT_BIN \
                        --enable-static \
-                       --enable-pic
+                       --enable-pic \
+                       --bit-depth=all
 
 compile_with_cmake_sp  libx265 build/linux ../../source \
                        -DENABLE_SHARED:bool=off
