@@ -6,6 +6,7 @@ services:
       - "2222:22"
     volumes:
       - data_vol:/home/deploy/deploy:z
+    restart: unless-stopped
   serve:
     build: serve
     ports:
@@ -14,5 +15,6 @@ services:
       - deploy
     volumes:
       - data_vol:/usr/share/nginx/html:z
+    restart: unless-stopped
 volumes:
   data_vol:
