@@ -303,7 +303,7 @@ git_get_fresh  libogg                     https://github.com/xiph/ogg.git
 git_get_fresh  libvorbis                  https://github.com/xiph/vorbis.git
 git_get_fresh  libvpx                     https://chromium.googlesource.com/webm/libvpx
 # git_get_fresh  freetype2                  git://git.sv.nongnu.org/freetype/freetype2.git
-git_get_fresh  fontconfig                 git://anongit.freedesktop.org/fontconfig
+# git_get_fresh  fontconfig                 git://anongit.freedesktop.org/fontconfig
 git_get_frver  frei0r       v1.6.1        https://github.com/dyne/frei0r.git
 git_get_fresh  fribidi                    https://github.com/fribidi/fribidi.git
 git_get_frver  libass       9a2b38e8f595  https://github.com/libass/libass.git
