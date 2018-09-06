@@ -2,19 +2,35 @@ version: '2'
 services:
   deploy:
     build: deploy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     ports:
       - "2222:22"
+    restart: unless-stopped
     volumes:
       - data_vol:/home/deploy/deploy:z
-    restart: unless-stopped
   serve:
     build: serve
-    ports:
-      - "8080:80"
     depends_on:
       - deploy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      default:
+        ipv4_address: 172.20.0.3
+    restart: unless-stopped
     volumes:
       - data_vol:/usr/share/nginx/html:z
-    restart: unless-stopped
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
 volumes:
   data_vol:

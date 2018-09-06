@@ -1,9 +1,8 @@
 FROM debian
 
-RUN apt-get update
-RUN apt-get install -y openssh-server
-RUN apt-get install -y patch
-RUN apt-get install -y rssh
+RUN apt-get update && \
+    apt-get install -y openssh-server patch rssh && \
+    rm -rf /var/lib/apt/lists/*
 
 
 WORKDIR /root
@@ -11,28 +10,23 @@ WORKDIR /root
 
 # PATCHING configuration
 COPY ssh_keys/ssh_host_rsa_key /etc/ssh/ssh_host_rsa_key
-COPY patches/sshd_config.patch  dockersetup/
-COPY patches/rssh.conf.patch    dockersetup/
+COPY patches/*.patch  dockersetup/
 
-RUN cd /etc/ssh  && patch < /root/dockersetup/sshd_config.patch
-RUN cd /etc      && patch < /root/dockersetup/rssh.conf.patch
+RUN cd /etc/ssh  && patch < /root/dockersetup/sshd_config.patch && \
+    cd /etc      && patch < /root/dockersetup/rssh.conf.patch
 
 
 # Setting up environment
 RUN mkdir /run/sshd
 RUN useradd deploy -s /usr/bin/rssh
 COPY ssh_keys/authorized_keys /home/deploy/.ssh/authorized_keys
-RUN mkdir /home/deploy/deploy
-RUN touch /home/deploy/deploy/.keepperm
-RUN chmod -R 440 /home/deploy
-RUN chmod 550 /home/deploy /home/deploy/.ssh
-RUN chmod 400 /home/deploy/.ssh/authorized_keys
-RUN chmod 775 /home/deploy/deploy
-RUN chown -R deploy:deploy /home/deploy
-
-
-# CLEANUP setup
-RUN rm -rf dockersetup
+RUN mkdir /home/deploy/deploy && \
+    touch /home/deploy/deploy/.keepperm && \
+    chmod -R 440 /home/deploy && \
+    chmod 550 /home/deploy /home/deploy/.ssh && \
+    chmod 400 /home/deploy/.ssh/authorized_keys && \
+    chmod 775 /home/deploy/deploy && \
+    chown -R deploy:deploy /home/deploy
 
 
 CMD ["/usr/sbin/sshd", "-D"]
