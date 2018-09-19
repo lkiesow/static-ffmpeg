@@ -4,7 +4,9 @@ set -u
 set -e
 
 
-FFMPEG_DIR="ffmpeg_g$(git rev-parse --short HEAD)_d$(date +%s)"
+DATE="$(date +%Y%m%d%H%M%S)"
+COMMIT="$(git rev-parse --short HEAD)"
+FFMPEG_DIR="ffmpeg_d${DATE}_g${COMMIT}"
 mkdir -p "$FFMPEG_DIR"
 
 cp ffmpeg_bin/ffmpeg "$FFMPEG_DIR/"
