@@ -3,6 +3,10 @@
 set -u
 set -e
 
+if [ "$CIRCLE_BRANCH" != master ]; then
+  echo "Deploy only master branch"
+  exit 0
+fi
 
 DATE="$(date +%Y%m%d%H%M%S)"
 COMMIT="$(git rev-parse --short HEAD)"
@@ -22,4 +26,4 @@ chmod 400 ~/.ssh/id_rsa
 echo "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
 chmod 400 ~/.ssh/known_hosts
 
-scp -P "$DEPLOY_SSH_PORT" -r "$FFMPEG_DIR" "$DEPLOY_SSH_USER@$DEPLOY_HOSTNAME:$DEPLOY_PATH" | true
+scp -P "$DEPLOY_SSH_PORT" -r "$FFMPEG_DIR" "$DEPLOY_SSH_USER@$DEPLOY_HOSTNAME:$DEPLOY_PATH"
