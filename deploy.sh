@@ -16,6 +16,7 @@ cp ffmpeg_build/share/man/man1/ffmpeg*   "$FFMPEG_DIR/man/man1"
 cp ffmpeg_build/share/man/man1/ffprobe*  "$FFMPEG_DIR/man/man1/"
 
 tar cfJ "${FFMPEG_DIR}.tar.xz" "${FFMPEG_DIR}"
+ln -s "${FFMPEG_DIR}.tar.xz" ffmpeg-latest.tar.xz
 
 mkdir -p ~/.ssh/
 chmod 700 ~/.ssh/
@@ -24,4 +25,4 @@ chmod 400 ~/.ssh/id_rsa
 echo "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
 chmod 400 ~/.ssh/known_hosts
 
-scp -P "$DEPLOY_SSH_PORT" "${FFMPEG_DIR}.tar.xz" "$DEPLOY_SSH_USER@$DEPLOY_HOSTNAME:$DEPLOY_PATH" || true
+scp -P "$DEPLOY_SSH_PORT" "${FFMPEG_DIR}.tar.xz" ffmpeg-latest.tar.xz "$DEPLOY_SSH_USER@$DEPLOY_HOSTNAME:$DEPLOY_PATH" || true
